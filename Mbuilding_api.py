@@ -36,10 +36,7 @@ def search_course_by_class_nbr(class_nbr):
         res = get_db().execute(query, (class_nbr,))
 
     # create sql connection
-    course_list = []
-    for row in res.fetchall():
-        course = Course(row)
-        course_list.append(course)
+    course_list = [Course(row) for row in res.fetchall()]
 
     print course_list
     return jsonify(courses=[course.serialize() for course in course_list])
